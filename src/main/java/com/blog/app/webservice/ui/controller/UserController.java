@@ -1,16 +1,23 @@
 package com.blog.app.webservice.ui.controller;
 
 import com.blog.app.webservice.service.UserService;
+import com.blog.app.webservice.shared.dto.ResponseDto;
 import com.blog.app.webservice.shared.dto.UserDto;
 import com.blog.app.webservice.ui.model.request.UserDetailsRequestModel;
 import com.blog.app.webservice.ui.model.response.UserRest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/users")
 public class UserController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -20,15 +27,29 @@ public class UserController {
         return "get user was called";
     }
 
-    @PostMapping
-    public UserRest creatUser(@RequestBody UserDetailsRequestModel userDetails){
+    @PostMapping("/create")
+    public ResponseEntity<UserRest> creatUser(@RequestBody UserDetailsRequestModel userDetails){
+        logger.info("About to register user: "+ userDetails);
         UserRest returnValue = new UserRest();
-        UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(userDetails, userDto);
-        UserDto createdUser = userService.createUser(userDto);
-        BeanUtils.copyProperties(createdUser, returnValue);
+        try {
 
-        return returnValue;
+            UserDto userDto = new UserDto();
+            BeanUtils.copyProperties(userDetails, userDto);
+            UserDto createdUser = userService.createUser(userDto);
+            BeanUtils.copyProperties(createdUser, returnValue);
+            logger.info("Successfully register user: " + returnValue);
+
+        }catch (Exception e){
+
+            returnValue.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.toString());
+            returnValue.setStatusMsg(e.getMessage());
+
+           return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(returnValue);
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(returnValue);
     }
 
     @PutMapping
