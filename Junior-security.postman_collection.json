@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "38f0543c-86c8-4457-a363-49e2c669066c",
+		"name": "Junior-security",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3854366"
+	},
+	"item": [
+		{
+			"name": "CreateUser",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Junior\",\n    \"lastName\": \"JJ\",\n    \"email\": \"junior@email.ca\",\n    \"password\": \"passpass\",\n    \"role\": \"Locator\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAccount",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "junior@email.ca",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "passpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myAccount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetContact",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/contact",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contact"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetBalance",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "junior@email.ca",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "passpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myBalance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myBalance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GeCards",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "junior@email.ca",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "passpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myCards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myCards"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
