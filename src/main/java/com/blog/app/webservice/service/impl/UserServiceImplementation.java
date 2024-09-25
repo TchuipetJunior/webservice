@@ -1,7 +1,7 @@
 package com.blog.app.webservice.service.impl;
 
 import com.blog.app.webservice.io.entity.UserEntity;
-import com.blog.app.webservice.repositories.UserRepository;
+import com.blog.app.webservice.io.repositories.UserRepository;
 import com.blog.app.webservice.service.UserService;
 import com.blog.app.webservice.shared.Utils;
 import com.blog.app.webservice.shared.dto.UserDto;
@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +54,19 @@ public class UserServiceImplementation implements UserService{
         UserDto returnValue = new UserDto();
         BeanUtils.copyProperties(storedUserDetails, returnValue);
 
+        return returnValue;
+    }
+
+    @Override
+    public UserDto getUser(String email) {
+        System.out.println(email);
+        Optional<UserEntity> userEntityOptional= userRepository.findByEmail(email);
+        if (!userEntityOptional.isPresent()) {
+            throw  new UsernameNotFoundException(email);
+        }
+
+        UserDto returnValue = new UserDto();
+        BeanUtils.copyProperties(userEntityOptional.get(), returnValue);
         return returnValue;
     }
 

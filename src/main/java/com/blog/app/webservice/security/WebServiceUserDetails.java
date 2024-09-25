@@ -2,7 +2,7 @@ package com.blog.app.webservice.security;
 
 
 import com.blog.app.webservice.io.entity.UserEntity;
-import com.blog.app.webservice.repositories.UserRepository;
+import com.blog.app.webservice.io.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

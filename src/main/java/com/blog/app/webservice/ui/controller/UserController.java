@@ -11,10 +11,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
+@PreAuthorize("hasAnyRole('USER')")
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -52,7 +54,8 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(returnValue);
     }
 
-    @PutMapping
+    @PutMapping("/update")
+    @PreAuthorize("hasAnyRole('USER')")  // Only users with ROLE_USER can access
     public String updateUser(){
         return "update user was called";
     }

@@ -1,4 +1,4 @@
-package com.blog.app.webservice.repositories;
+package com.blog.app.webservice.io.repositories;
 
 import com.blog.app.webservice.io.entity.UserEntity;
 import org.springframework.data.repository.CrudRepository;
