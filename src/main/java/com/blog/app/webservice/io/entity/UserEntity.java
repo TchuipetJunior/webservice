@@ -27,6 +27,9 @@ public class UserEntity implements Serializable {
     @Column(nullable = false, length =120, unique = true)
     private String email;
 
+    @Column(nullable = false, length = 50)
+    private String role;
+
     @Column(nullable = false)
     private String encryptedPassword;
 
@@ -97,5 +100,13 @@ public class UserEntity implements Serializable {
 
     public void setEmailVerificationStatus(boolean emailVerificationStatus) {
         this.emailVerificationStatus = emailVerificationStatus;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
